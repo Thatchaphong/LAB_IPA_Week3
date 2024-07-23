@@ -2,6 +2,7 @@
 
 mkdir -m 777 -p speedtest_results
 
+date -u
 
 echo "Retrieving server list..."
 servers=$(speedtest-cli --list | awk -F ') ' '{print $1}' | grep -E '^[0-9]+$')
@@ -15,6 +16,7 @@ fi
 for server in $servers; do
     echo "Testing server ID: $server"
     result_file="speedtest_results/server_11.csv"
+    date -u >> $result_file
     speedtest-cli --server $server >> "$result_file"
     echo "Results saved to $result_file"
 done
